@@ -6,7 +6,7 @@ function DisplayListings({listings}){
     listings.length === 0 ? null:
     <ul className="listings-container">
       {listings.map((listing, i) => (
-        <Listing listing={listing} key={listing.id} index={i}/>
+        <Listing listing={listing} key={listing.get('id')} index={i}/>
         ))}
     </ul>
 

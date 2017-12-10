@@ -1,16 +1,12 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Subscriptions } from '../containers';
 import DisplayListings from './Listings/DisplayListings';
 import Pagination from './Utilities/Pagination';
 import MoveToTop from './Utilities/MoveToTop';
 
 
-class Reader extends PureComponent {
-	constructor(props){
-		super(props);
-		this.props.initialLoadSubscriptions();
-	}
-
+class Reader extends Component {
+	
 	componentDidMount(){
 		this.props.getListings('', '', 0);
 	}

@@ -76,9 +76,9 @@ export function getSubreddits(before, after, count, type='add'){
     if(count === 0){
       url = `https://www.reddit.com/subreddits.json`;
     }else if(after !== ''){
-      url = `https://www.reddit.com/subreddits.json?count=${this.state.count}&after=${after}`;
+      url = `https://www.reddit.com/subreddits.json?count=${count}&after=${after}`;
     }else if(before !== ''){
-      url = `https://www.reddit.com/subreddits.json?count=${this.state.count}&before=${before}`;
+      url = `https://www.reddit.com/subreddits.json?count=${count}&before=${before}`;
     }else{
       console.log('Error with subreddits request');
     }

@@ -1,10 +1,12 @@
-import React, { PureComponent} from 'react';
+import React, { Component} from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import { Readers, ManageSubscription } from '../containers'
 
-class Home extends PureComponent {
+
+class Home extends Component {
   constructor(props){
     super(props);
+
     this.props.initialLoadSubscriptions();
 
     this.homeHandler = this.homeHandler.bind(this);

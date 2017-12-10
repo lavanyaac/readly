@@ -88,7 +88,7 @@ export function getListings(before, after, count, type='add', transactionType='r
 		  			obj.id = listing.data.id;
 		  			return Map(obj);
 	  			});
-
+	  		
 	  		dispatch(loadListings(List(listings)));
 	  		dispatch(loadListingsAfter(after));
 	  		dispatch(loadListingsBefore(before));

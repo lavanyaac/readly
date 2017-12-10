@@ -32,6 +32,7 @@ const SubReddits = (state = initialState, action) => {
 				const index = subreddits.findIndex(subreddit => subreddit.get('display_name') === action.subreddit);
 				return state.set('subreddits',subreddits.update(index, subreddit => subreddit.set('user_subscribed', false)));
 			}
+			return state;
 		case 'HANDLE_SUBSCRIBE_UNSUBSCRIBE':{
 			const isSubscribed = action.e.target.className === 'Unsubscribe' ? false: true;
 			let subreddits = state.get('subreddits');

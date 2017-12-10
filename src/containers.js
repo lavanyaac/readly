@@ -9,9 +9,7 @@ import { getSubreddits, handleSubscribeUnsubscribe } from './actions/subreddits'
 
 export const HomePage = connect(
 	function mapStateToProps(state){
-		return{
-			listings: state.Listings.get('listings'),
-		}
+		return{	}
 	},
 
 	function mapDispatchToProps(dispatch){
@@ -38,9 +36,6 @@ export const Readers = connect(
 		return{
 			getListings: (subscriptions, count, before, after, type, transactionType) => {
 				dispatch(getListings(subscriptions, count, before, after, type, transactionType));
-			},
-			initialLoadSubscriptions: () => {
-				dispatch(initialLoadSubscriptions());
 			}
 		}
 	}

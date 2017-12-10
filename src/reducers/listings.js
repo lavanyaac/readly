@@ -15,11 +15,11 @@ const Listings = (state = initialState, action) => {
 			return state.update('gettingListings', () => true);
 		case 'LOAD_LISTINGS':
 			return state.set('listings', action.listings);
-		case 'LOAD_AFTER':
+		case 'LOAD_LISTINGS_AFTER':
 			return state.set('after', action.after);
-		case 'LOAD_BEFORE':
+		case 'LOAD_LISTINGS_BEFORE':
 			return state.set('before', action.before);
-		case 'LOAD_COUNT':
+		case 'LOAD_LISTINGS_COUNT':
 			return state.set('count', action.count); 
 		case 'GET_LISTINGS_ERROR':
 			return state.merge({

@@ -1,8 +1,10 @@
 import { connect } from 'react-redux';
 import Reader from './components/Reader';
 import DisplaySubscriptions from './components/Subscriptions/DisplaySubscriptions';
+import ManageSubscriptions from './components/ManageSubscriptions/ManageSubscriptions';
 import { getListings } from './actions/listings';
 import { loadSubscriptions, unSubscribe } from './actions/subscriptions';
+import { getSubreddits } from './actions/subreddits';
 
 
 export const Readers = connect(
@@ -43,3 +45,22 @@ export const Subscriptions = connect(
 		}
 	}
 )(DisplaySubscriptions);
+
+export const ManageSubscription = connect(
+	function mapStateToProps(state){
+		return{
+			subreddits: state.SubReddits.get('subreddits'),
+			after: state.SubReddits.get('after'),
+			before: state.SubReddits.get('before'),
+			count: state.SubReddits.get('count')
+		}
+	},
+
+	function mapDispatchToProps(dispatch){
+		return{
+			getSubreddits: (before, after, count, type) => {
+				dispatch(getSubreddits(before, after, count, type));
+			}
+		}
+	}
+)(ManageSubscriptions);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import { Readers } from '../containers'
+import { Readers, ManageSubscription } from '../containers'
 import ManageSubscriptions from './ManageSubscriptions/ManageSubscriptions';
 
 class App extends Component {
@@ -16,7 +16,7 @@ class App extends Component {
         <BrowserRouter>
           <Switch>
             <Route name="reader" exact path="/" component={() => (<Readers />)}/>
-            <Route name="managesubscriptions" path="/managesubscriptions" component={() => (<ManageSubscriptions />)}/>
+            <Route name="managesubscriptions" path="/managesubscriptions" component={() => (<ManageSubscription />)}/>
           </Switch>
         </BrowserRouter>
       </div>

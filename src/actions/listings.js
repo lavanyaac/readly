@@ -66,6 +66,7 @@ export function getListings(before, after, count, type='add', transactionType='r
 
 			axios.get(url)
 			.then(results => {
+				dispatch(gettingListings(subscriptions));
 				const after = results.data.data.after === null? '': results.data.data.after;
 	  		const before = results.data.data.before === null? '': results.data.data.before;
 	  		const addCount = type === 'add' ? 25 : -25;
@@ -91,7 +92,6 @@ export function getListings(before, after, count, type='add', transactionType='r
 
 			})
 			.catch(error => {
-				console.log(error);
 				dispatch(getListingsError(error));
 			});
 	}

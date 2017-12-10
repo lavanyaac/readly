@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux';
 import Listings from './listings.js';
 import Subscriptions from './subscriptions.js';
-// import Dashboard from './Dashboard.js';
+import SubReddits from './subreddit.js';
 
 const appReducer = combineReducers({
   Listings,
-  Subscriptions
+  Subscriptions,
+  SubReddits
 });
 
 

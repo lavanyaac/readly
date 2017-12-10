@@ -45,12 +45,16 @@ function getListingsError(error) {
 }
 
 export function getListings(before, after, count, type='add', transactionType='regular', subscriptions){
-	return(dispatch) => {
+	return(dispatch, getState) => {
 			let url;
+			if(!subscriptions){
+				subscriptions = getState().Subscriptions.get('subscriptions').toJS();
+			}
 			
 			if(List.isList(subscriptions)){
 				subscriptions = subscriptions.toJS();
 			}
+
 			const path = subscriptions.length > 0 ? subscriptions.join('+'): 'news';
 
 			count = (transactionType === 'refresh')? 0 : count;

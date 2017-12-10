@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { List, Map } from 'immutable';
+import {updateSubscription} from './subscriptions';
 
 
 function gettingSubreddits(message) {
@@ -44,7 +45,7 @@ function getSubredditsError(error) {
   }
 }
 
-function handleSubscribeUnsubscribe(e, subreddit){
+function updateSubreddits(e, subreddit){
   return {
     type: 'HANDLE_SUBSCRIBE_UNSUBSCRIBE',
     e, 
@@ -52,12 +53,25 @@ function handleSubscribeUnsubscribe(e, subreddit){
   }
 }
 
+export function updateSubscribeStatus(subreddit){
+  return{
+    type: 'UPDATE_SUBSCRIPTION_STATUS',
+    subreddit
+  }
+}
+
+export function handleSubscribeUnsubscribe(e, subreddit){
+  const status = e.target.className === 'Unsubscribe' ? 'unsubscribe': 'subscribe';
+  return(dispatch) => {
+    dispatch(updateSubreddits(e, subreddit));
+    dispatch(updateSubscription(subreddit, status));
+  }
+}
+
 export function getSubreddits(before, after, count, type='add'){
 	return(dispatch, getState) => {
     dispatch(gettingSubreddits('Getting Subreddits'));
-
 		let url;
-    debugger;
     if(!count) count = 0;
     if(count === 0){
       url = `https://www.reddit.com/subreddits.json`;
@@ -85,7 +99,7 @@ export function getSubreddits(before, after, count, type='add'){
         obj['created'] = subreddit.data.created;
         obj['public_description'] = subreddit.data.public_description;
         obj['user_subscribed'] = user_subscribed.some((subscription)=>{
-          return subscription === subreddit.data.display_name.toLowerCase();
+          return subscription === subreddit.data.display_name;
         })
         return Map(obj);
       });

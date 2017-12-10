@@ -1,10 +1,27 @@
 import { connect } from 'react-redux';
 import Reader from './components/Reader';
+import Home from './components/Home';
 import DisplaySubscriptions from './components/Subscriptions/DisplaySubscriptions';
 import ManageSubscriptions from './components/ManageSubscriptions/ManageSubscriptions';
 import { getListings } from './actions/listings';
-import { loadSubscriptions, unSubscribe } from './actions/subscriptions';
-import { getSubreddits } from './actions/subreddits';
+import { loadSubscriptions, updateSubscription, initialLoadSubscriptions } from './actions/subscriptions';
+import { getSubreddits, handleSubscribeUnsubscribe } from './actions/subreddits';
+
+export const HomePage = connect(
+	function mapStateToProps(state){
+		return{
+			listings: state.Listings.get('listings'),
+		}
+	},
+
+	function mapDispatchToProps(dispatch){
+		return{
+			initialLoadSubscriptions: () => {
+				dispatch(initialLoadSubscriptions());
+			}
+		}
+	}
+)(Home);
 
 
 export const Readers = connect(
@@ -21,6 +38,9 @@ export const Readers = connect(
 		return{
 			getListings: (subscriptions, count, before, after, type, transactionType) => {
 				dispatch(getListings(subscriptions, count, before, after, type, transactionType));
+			},
+			initialLoadSubscriptions: () => {
+				dispatch(initialLoadSubscriptions());
 			}
 		}
 	}
@@ -28,7 +48,6 @@ export const Readers = connect(
 
 export const Subscriptions = connect(
 	function mapStateToProps(state){
-		console.log('container', state)
 		return{
 			subscriptions: state.Subscriptions.get('subscriptions')
 		}
@@ -39,8 +58,8 @@ export const Subscriptions = connect(
 			loadSubscriptions: (subscriptions) => {
 				dispatch(loadSubscriptions(subscriptions));
 			},
-			unSubscribe: (subreddit) => {
-				dispatch(unSubscribe(subreddit));
+			updateSubscription: (subreddit) => {
+				dispatch(updateSubscription(subreddit, 'unsubscribe'));
 			}
 		}
 	}
@@ -60,6 +79,10 @@ export const ManageSubscription = connect(
 		return{
 			getSubreddits: (before, after, count, type) => {
 				dispatch(getSubreddits(before, after, count, type));
+			},
+
+			handleSubscribeUnsubscribe: (e, subreddit) => {
+				dispatch(handleSubscribeUnsubscribe(e, subreddit));
 			}
 		}
 	}

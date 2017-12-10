@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Subscriptions } from '../../containers';
 import DisplaySubReddits from './DisplaySubReddits';
 import Pagination from '../Utilities/Pagination';
 import MoveToTop from '../Utilities/MoveToTop'
-import { getSubscriptions, setSubscriptions } from '../Utilities/helpers';
 
-class ManageSubscriptions extends Component {
+class ManageSubscriptions extends PureComponent {
 	constructor(props){
 		super(props);
 	}
@@ -19,14 +18,14 @@ class ManageSubscriptions extends Component {
   }
 
 	render() {
-    const { subreddits, before, after, count } = this.props
+    const { subreddits, before, after, count, handleSubscribeUnsubscribe } = this.props
     return (
       <div className="managesubscription">
       	<div><h2>Manage Subscription</h2></div>
         <div className="managesubscription-container">
         	<DisplaySubReddits 
           subreddits={subreddits}
-          handleSubscribeUnsubscribeClick={this.handleSubscribeUnsubscribe}/>
+          handleSubscribeUnsubscribe={handleSubscribeUnsubscribe}/>
           <Pagination 
               before={before} 
               after={after} 

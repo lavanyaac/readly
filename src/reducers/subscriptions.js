@@ -14,8 +14,9 @@ const Subscriptions = (state = initialState, action) => {
 			return state.set('subscriptions',subscriptions.delete(index));
 		}
 		case 'SUBSCRIBE':
-			return state;
-		case 'LOAD_LOAD_SUBSCRIPTIONS_ERROR':
+			let subscriptions = state.get('subscriptions');
+			return state.set('subscriptions',subscriptions.push(action.subreddit));
+		case 'LOAD_SUBSCRIPTIONS_ERROR':
 			return state;
 		default:
 			return state;

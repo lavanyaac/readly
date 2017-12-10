@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import Store from './store';
-import Home from './components/Home';
+import HomePage from './containers';
 
 const store = Store();
 
-class App extends Component {
-  render() {
-    return (
-      <Provider store = { store }>
-        <Home/>
-      </Provider>
-    );
-  }
+function App() {
+  return (
+    <Provider store = { store }>
+      <HomePage/>
+    </Provider>
+  );
 }
 export default App;

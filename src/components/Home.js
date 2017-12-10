@@ -1,17 +1,23 @@
-import React, { Component } from 'react';
+import React, { PureComponent} from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import { Readers, ManageSubscription } from '../containers'
-import ManageSubscriptions from './ManageSubscriptions/ManageSubscriptions';
 
-class App extends Component {
+class Home extends PureComponent {
+  constructor(props){
+    super(props);
+    this.props.initialLoadSubscriptions();
+
+    this.homeHandler = this.homeHandler.bind(this);
+  }
+
   homeHandler(){
     window.location.href='/';
   }
-  render() {
+  render(){
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title" onClick={this.homeHandler.bind(this)}>Reddit Reader</h1>
+          <h1 className="App-title" onClick={this.homeHandler}>Reddit Reader</h1>
         </header>
         <BrowserRouter>
           <Switch>
@@ -24,4 +30,5 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Home;
+

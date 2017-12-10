@@ -1,35 +1,26 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Subscriptions } from '../containers';
 import DisplayListings from './Listings/DisplayListings';
 import Pagination from './Utilities/Pagination';
 import MoveToTop from './Utilities/MoveToTop';
-import { getSubscriptions } from './Utilities/helpers';
 
 
-class Home extends Component {
+class Reader extends PureComponent {
 	constructor(props){
 		super(props);
+		this.props.initialLoadSubscriptions();
 	}
 
 	componentDidMount(){
-		this.getData('', '', 0);
+		this.props.getListings('', '', 0);
 	}
 
 	componentDidUpdate(){
   	window.scrollTo(0, 0);
   }
-
-	getData(before, after, count, type, transactionType){
-		const subscriptions = getSubscriptions();
-		// this.setState({subscriptions});
-		this.props.getListings(before, after, count, type, transactionType, subscriptions);
-	}
-
-	refreshListings(){
-		this.getData();
-	}
+  
 	render() {
-		const {listings, before, after, count} = this.props;
+		const {listings, before, after, count, getListings} = this.props;
     return (
       <div>
       	<h2> Stories for today...</h2>
@@ -39,17 +30,16 @@ class Home extends Component {
 				        before={before} 
 				        after={after} 
 				        count={count}
-				        callback={this.getData}/>
+				        callback={getListings}/>
 		      	<DisplayListings listings={listings} />
 		      	<Pagination 
 				        before={before} 
 				        after={after} 
 				        count={count}
-				        callback={this.getData}/>
+				        callback={getListings}/>
 			    </div>
 			    <Subscriptions 
-		      displayManageSubscription={true}
-		      refreshListings={this.refreshListings}/>
+		      displayManageSubscription={true} />
 		      <MoveToTop scrollStepInPx="50" delayInMs="17"/>
 	      </div>
       </div>
@@ -58,4 +48,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default Reader;

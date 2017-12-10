@@ -26,12 +26,17 @@ const SubReddits = (state = initialState, action) => {
 				'gettingSubreddits':false, 
 				'getSubredditsDataError': action.error
 			});
+		case 'UPDATE_SUBSCRIPTION_STATUS':
+			let subreddits = state.get('subreddits');
+			if(subreddits.size > 0){
+				const index = subreddits.findIndex(subreddit => subreddit.get('display_name') === action.subreddit);
+				return state.set('subreddits',subreddits.update(index, subreddit => subreddit.set('user_subscribed', false)));
+			}
 		case 'HANDLE_SUBSCRIBE_UNSUBSCRIBE':{
 			const isSubscribed = action.e.target.className === 'Unsubscribe' ? false: true;
 			let subreddits = state.get('subreddits');
-			const index = subreddits.indexOf(action.subreddit);
+			const index = subreddits.findIndex(subreddit => subreddit.get('display_name') === action.subreddit);
 			return state.set('subreddits',subreddits.update(index, subreddit => subreddit.set('user_subscribed', isSubscribed)));
-
 		} 
 		default:
 			return state;

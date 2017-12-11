@@ -7,6 +7,7 @@ function handleManageSubscriptionsClick(history){
 }
 
 function DisplaySubscriptions({subscriptions, displayManageSubscription, updateSubscription, history}) {
+  const updateData = displayManageSubscription ? 'listings' : 'subreddits';
     
   const manageSubscription = displayManageSubscription ? 
   <div className="manageSubscription">
@@ -25,7 +26,8 @@ function DisplaySubscriptions({subscriptions, displayManageSubscription, updateS
             subscription={subscription} 
             key={i} 
             subscriptionIndex={i}
-            handleUnsubscribeClick={updateSubscription}/>
+            updateSubscription={updateSubscription}
+            updateData={updateData}/>
           ))
         }
       </ul>

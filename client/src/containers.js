@@ -53,8 +53,8 @@ export const Subscriptions = connect(
 			loadSubscriptions: (subscriptions) => {
 				dispatch(loadSubscriptions(subscriptions));
 			},
-			updateSubscription: (subreddit) => {
-				dispatch(updateSubscription(subreddit, 'unsubscribe'));
+			updateSubscription: (subreddit, subscribeUnsubscribe, updateData) => {
+				dispatch(updateSubscription(subreddit, subscribeUnsubscribe, updateData));
 			}
 		}
 	}

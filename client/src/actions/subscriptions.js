@@ -30,20 +30,29 @@ export function initialLoadSubscriptions(){
     dispatch(loadSubscriptions(List(subscriptions)));
   }
 }
-
-export function updateSubscription(subreddit, subscribeUnsubscribe) {
-  return(dispatch, getState) => {
-    if(subscribeUnsubscribe === 'subscribe'){
-      dispatch(subscribe(subreddit));
-    }else if(subscribeUnsubscribe === 'unsubscribe'){
-      dispatch(unsubscribe(subreddit));
-    }
-    const subscriptions = getState().Subscriptions.get('subscriptions').toJS();
-    setSubscriptions(subscriptions);
-
-    dispatch(getListings('', '', 0, 'add', 'regular', subscriptions));
-    dispatch(updateSubscribeStatus(subreddit, subscribeUnsubscribe));
+function updateSubscriptionList(dispatch, getState,subreddit, subscribeUnsubscribe){
+  if(subscribeUnsubscribe === 'subscribe'){
+    dispatch(subscribe(subreddit));
+  }else if(subscribeUnsubscribe === 'unsubscribe'){
+    dispatch(unsubscribe(subreddit));
   }
+  const subscriptions = getState().Subscriptions.get('subscriptions').toJS();
+  setSubscriptions(subscriptions);
+}
+export function updateSubscription(subreddit, subscribeUnsubscribe, updateData) {
+  return(dispatch, getState)=>{
+      updateSubscriptionList(dispatch, getState, subreddit, subscribeUnsubscribe)
+      debugger;
+      if(updateData === 'listings'){
+        const subscriptions = getState().Subscriptions.get('subscriptions').toJS();
+        dispatch(getListings('', '', 0, 'add', 'regular', subscriptions));
+      }
+      if(updateData === 'subreddits'){
+        dispatch(updateSubscribeStatus(subreddit, subscribeUnsubscribe));
+      }
+  }
+    
+    
 }
 
 

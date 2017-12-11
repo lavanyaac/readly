@@ -1,9 +1,9 @@
 import { createStore, applyMiddleware } from 'redux';
 import Reducer from './reducers/index.js';
 import thunk from 'redux-thunk';
-import { createLogger } from 'redux-logger';
+// import { createLogger } from 'redux-logger';
 
-const middleware = applyMiddleware(thunk, createLogger());
+const middleware = applyMiddleware(thunk);
 
 
 export default function store(preloadedState){

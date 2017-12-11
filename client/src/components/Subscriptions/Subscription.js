@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Subscription({subscription, handleUnsubscribeClick}){
+function Subscription({subscription, updateSubscription, updateData}){
   return (
     <li className="subscriptions">
-      <button onClick={()=> handleUnsubscribeClick(subscription)}>
+      <button onClick={()=> updateSubscription(subscription, 'unsubscribe', updateData)}>
       Unsubscribe
       </button>
       <p>{subscription}</p>
